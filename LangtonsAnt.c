@@ -94,38 +94,38 @@ void turnAnt(Aptr target, int direction) { // функция поворота, �
 void thinkAnt(Aptr target) { // контроль поведения муравья
         int y = target->pos[0],x = target->pos[1];
         switch (screen[y][x]) {
-			case '%':
-            target -> turn(target, LEFT+2*directionControl.bit1);
-            screen[y][x]='.';
-            break;
-            case '.':
-            target -> turn(target, LEFT+2*directionControl.bit2);
-            screen[y][x]='1';
-            break;
-			case '-':
-			target -> turn(target, LEFT+2*directionControl.bit3);
-			screen[y][x]='%';
-			break;
-			case '1':
-            target -> turn(target, LEFT+2*directionControl.bit4);
-            screen[y][x]='2';
-            break;
-			case '2':
-            target -> turn(target, LEFT+2*directionControl.bit5);
-            screen[y][x]='8';
-            break;
-			case '8':
-            target -> turn(target, LEFT+2*directionControl.bit6);
-            screen[y][x]='z';
-            break;
-			case 'z':
-            target -> turn(target, LEFT+2*directionControl.bit7);
-            screen[y][x]='m';
-            break;
-			case 'm':
-            target -> turn(target, LEFT+2*directionControl.bit8);
-            screen[y][x]='%';
-            break;
+		case '%':
+            	target -> turn(target, LEFT+2*directionControl.bit1);
+            	screen[y][x]='.';
+            	break;
+            	case '.':
+            	target -> turn(target, LEFT+2*directionControl.bit2);
+            	screen[y][x]='1';
+            	break;
+		case '-':
+		target -> turn(target, LEFT+2*directionControl.bit3);
+		screen[y][x]='%';
+		break;
+		case '1':
+        	target -> turn(target, LEFT+2*directionControl.bit4);
+            	screen[y][x]='2';
+            	break;
+		case '2':
+          	target -> turn(target, LEFT+2*directionControl.bit5);
+            	screen[y][x]='8';
+            	break;
+		case '8':
+            	target -> turn(target, LEFT+2*directionControl.bit6);
+            	screen[y][x]='z';
+            	break;
+		case 'z':
+            	target -> turn(target, LEFT+2*directionControl.bit7);
+            	screen[y][x]='m';
+            	break;
+		case 'm':
+            	target -> turn(target, LEFT+2*directionControl.bit8);
+            	screen[y][x]='%';
+            	break;
         }
-    }
+}
 

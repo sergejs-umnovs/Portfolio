@@ -10,8 +10,8 @@
 * 
 * 08.06.2020
 * 
-* Консольный "скринсейвер" в стиле Матрицы
-* Это скорее работа с WinAPI
+* РљРѕРЅСЃРѕР»СЊРЅС‹Р№ "СЃРєСЂРёРЅСЃРµР№РІРµСЂ" РІ СЃС‚РёР»Рµ РњР°С‚СЂРёС†С‹
+* Р­С‚Рѕ СЃРєРѕСЂРµРµ СЂР°Р±РѕС‚Р° СЃ WinAPI
 */
 #define SCREEN_SIZE 320*84 
 #define SCREEN_WIDTH 320 
@@ -19,48 +19,47 @@
 #define DROPRATE 1000 //define in ppm
 #define DROPSIZE 15 //drop length
 
-COORD size = {SCREEN_WIDTH, SCREEN_HEIGTH}; // информация для создания окна
-
+COORD size = {SCREEN_WIDTH, SCREEN_HEIGTH}; // РёРЅС„РѕСЂРјР°С†РёСЏ РґР»СЏ СЃРѕР·РґР°РЅРёСЏ РѕРєРЅР°
 SMALL_RECT rekt = {0,0,SCREEN_WIDTH - 1,SCREEN_HEIGTH - 1};
 
-char screen[SCREEN_SIZE] = {0}; //буфер вывода 
-byte drops[SCREEN_SIZE] = {0}; // буфер длин
+char screen[SCREEN_SIZE] = {0}; //Р±СѓС„РµСЂ РІС‹РІРѕРґР° 
+byte drops[SCREEN_SIZE] = {0}; // Р±СѓС„РµСЂ РґР»РёРЅ
 
 int main() {
 	srand(0);
 	DWORD charsWritten;
-	HWND handle = CreateConsoleScreenBuffer(GENERIC_READ | GENERIC_WRITE, 0, 0, CONSOLE_TEXTMODE_BUFFER, 0); // Создаём консоль
-	SetConsoleActiveScreenBuffer(handle); // делаем выделенную рукоять активной
-	SetConsoleTitle("MATRIX"); // изменяем заголовок окна
-	SetConsoleScreenBufferSize(handle, size); // задаём размер экранного буфера в символах
-	SetConsoleWindowInfo(handle, 1, &rekt); // задаём размер окна в символах
-	SetConsoleTextAttribute(handle, FOREGROUND_GREEN | FOREGROUND_INTENSITY); // делаем все выводимые символы зелёными
+	HWND handle = CreateConsoleScreenBuffer(GENERIC_READ | GENERIC_WRITE, 0, 0, CONSOLE_TEXTMODE_BUFFER, 0); // РЎРѕР·РґР°С‘Рј РєРѕРЅСЃРѕР»СЊ
+	SetConsoleActiveScreenBuffer(handle); // РґРµР»Р°РµРј РІС‹РґРµР»РµРЅРЅСѓСЋ СЂСѓРєРѕСЏС‚СЊ Р°РєС‚РёРІРЅРѕР№
+	SetConsoleTitle("MATRIX"); // РёР·РјРµРЅСЏРµРј Р·Р°РіРѕР»РѕРІРѕРє РѕРєРЅР°
+	SetConsoleScreenBufferSize(handle, size); // Р·Р°РґР°С‘Рј СЂР°Р·РјРµСЂ СЌРєСЂР°РЅРЅРѕРіРѕ Р±СѓС„РµСЂР° РІ СЃРёРјРІРѕР»Р°С…
+	SetConsoleWindowInfo(handle, 1, &rekt); // Р·Р°РґР°С‘Рј СЂР°Р·РјРµСЂ РѕРєРЅР° РІ СЃРёРјРІРѕР»Р°С…
+	SetConsoleTextAttribute(handle, FOREGROUND_GREEN | FOREGROUND_INTENSITY); // РґРµР»Р°РµРј РІСЃРµ РІС‹РІРѕРґРёРјС‹Рµ СЃРёРјРІРѕР»С‹ Р·РµР»С‘РЅС‹РјРё
 	byte temp;
 	while (1) {
-		for (int i = 0; i < SCREEN_WIDTH; i++) { //первый цикл задаёт длину капель
+		for (int i = 0; i < SCREEN_WIDTH; i++) { //РїРµСЂРІС‹Р№ С†РёРєР» Р·Р°РґР°С‘С‚ РґР»РёРЅСѓ РєР°РїРµР»СЊ
 			if (rand()%1000000 <= DROPRATE) {
 				drops[i] = rand()%DROPSIZE;
 			}
 		}
 		
-		for (int i = 0; i < SCREEN_SIZE; i++) { // второй цикл задаёт символ для буфера вывода
+		for (int i = 0; i < SCREEN_SIZE; i++) { // РІС‚РѕСЂРѕР№ С†РёРєР» Р·Р°РґР°С‘С‚ СЃРёРјРІРѕР» РґР»СЏ Р±СѓС„РµСЂР° РІС‹РІРѕРґР°
 			if (drops[i] > 0) 
 				screen[i] = 33 + rand()%94;
 			else
 				screen[i] = ' ';
 		}
 		
-		for (int i = SCREEN_SIZE - 1; i > SCREEN_WIDTH - 1; i--) { // третий цикл копирует и присваивает значения капель на строку вниз
+		for (int i = SCREEN_SIZE - 1; i > SCREEN_WIDTH - 1; i--) { // С‚СЂРµС‚РёР№ С†РёРєР» РєРѕРїРёСЂСѓРµС‚ Рё РїСЂРёСЃРІР°РёРІР°РµС‚ Р·РЅР°С‡РµРЅРёСЏ РєР°РїРµР»СЊ РЅР° СЃС‚СЂРѕРєСѓ РІРЅРёР·
 			temp = drops[i-SCREEN_WIDTH];
 			drops[i] = temp;
 		}
 		
-		for (int i = 0; i < SCREEN_WIDTH; i++) { // четвёртый цикл уменьшает все значения в первой строке, которые > 0
+		for (int i = 0; i < SCREEN_WIDTH; i++) { // С‡РµС‚РІС‘СЂС‚С‹Р№ С†РёРєР» СѓРјРµРЅСЊС€Р°РµС‚ РІСЃРµ Р·РЅР°С‡РµРЅРёСЏ РІ РїРµСЂРІРѕР№ СЃС‚СЂРѕРєРµ, РєРѕС‚РѕСЂС‹Рµ > 0
 			if (drops[i] > 0) drops[i] -= 1;
 		}
 		
-		WriteConsole(handle, screen, SCREEN_SIZE, &charsWritten, 0); // вывод изображения
-		Sleep(50); //задержка
+		WriteConsole(handle, screen, SCREEN_SIZE, &charsWritten, 0); // РІС‹РІРѕРґ РёР·РѕР±СЂР°Р¶РµРЅРёСЏ
+		Sleep(50); //Г§Г Г¤ГҐГ°Г¦ГЄГ 
 	}
 	return 0;
 }

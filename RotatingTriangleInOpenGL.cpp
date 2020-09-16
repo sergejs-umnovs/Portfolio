@@ -5,7 +5,7 @@
 
 
 // 
-// Программа, которая рисует вращающийся треугольник
+// РџСЂРѕРіСЂР°РјРјР°, РєРѕС‚РѕСЂР°СЏ РІС‹РІРѕРґРёС‚ РЅР° СЌРєСЂР°РЅ РІСЂР°С‰Р°СЋС‰РёР№СЃСЏ С‚СЂРµСѓРіРѕР»СЊРЅРёРє
 // 
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
@@ -20,7 +20,7 @@ void processInput(GLFWwindow* window) {
 #define W_HEIGHT 800
 
 
-const char* vertexShaderSource = "#version 330 core\n" // шейдер
+const char* vertexShaderSource = "#version 330 core\n" // ГёГҐГ©Г¤ГҐГ°
 "layout (location = 0) in vec3 aPos;\n"
 "void main() {\n"
 "	gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0f);\n"
@@ -59,7 +59,7 @@ int main() {
 	//::SHADER  SETUP::
 	//:::::::::::::::::
 
-	unsigned int vertexShader = glCreateShader(GL_VERTEX_SHADER); // создаём пустышку
+	unsigned int vertexShader = glCreateShader(GL_VERTEX_SHADER); // Г±Г®Г§Г¤Г ВёГ¬ ГЇГіГ±ГІГ»ГёГЄГі
 	glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
 	glCompileShader(vertexShader);
 
@@ -73,7 +73,7 @@ int main() {
 
 
 
-	unsigned int fragmentShader = glCreateShader(GL_FRAGMENT_SHADER); // создаём пустышку
+	unsigned int fragmentShader = glCreateShader(GL_FRAGMENT_SHADER); // Г±Г®Г§Г¤Г ВёГ¬ ГЇГіГ±ГІГ»ГёГЄГі
 	glShaderSource(fragmentShader, 1, &fragmentShaderSource, NULL);
 	glCompileShader(fragmentShader);
 
@@ -121,15 +121,15 @@ int main() {
 		0.0f, 0.0f, 0.0f
 	};
 
-	unsigned int VBO, VAO; // для хранения id
+	unsigned int VBO, VAO; // Г¤Г«Гї ГµГ°Г Г­ГҐГ­ГЁГї id
 
 	glGenVertexArrays(1, &VAO);
-	glGenBuffers(1, &VBO); // делай 1 буфер
+	glGenBuffers(1, &VBO); // Г¤ГҐГ«Г Г© 1 ГЎГіГґГҐГ°
 
-	glBindVertexArray(VAO);// сделай из выделенного пространства рабочий буфер
+	glBindVertexArray(VAO);// Г±Г¤ГҐГ«Г Г© ГЁГ§ ГўГ»Г¤ГҐГ«ГҐГ­Г­Г®ГЈГ® ГЇГ°Г®Г±ГІГ°Г Г­Г±ГІГўГ  Г°Г ГЎГ®Г·ГЁГ© ГЎГіГґГҐГ°
 
-	glBindBuffer(GL_ARRAY_BUFFER, VBO); // сделай из выделенного пространства рабочий буфер
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW); // добавь в буфер данные
+	glBindBuffer(GL_ARRAY_BUFFER, VBO); // Г±Г¤ГҐГ«Г Г© ГЁГ§ ГўГ»Г¤ГҐГ«ГҐГ­Г­Г®ГЈГ® ГЇГ°Г®Г±ГІГ°Г Г­Г±ГІГўГ  Г°Г ГЎГ®Г·ГЁГ© ГЎГіГґГҐГ°
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW); // Г¤Г®ГЎГ ГўГј Гў ГЎГіГґГҐГ° Г¤Г Г­Г­Г»ГҐ
 
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);

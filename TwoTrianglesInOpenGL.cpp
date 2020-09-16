@@ -4,7 +4,7 @@
 //#include <windows.h>
 
 //
-// Программа, которая рисует два треугольника - один жёлтый, второй - красный
+// РџСЂРѕРіСЂР°РјРјР°, РєРѕС‚РѕСЂР°СЏ СЂРёСЃСѓРµС‚ РґРІР° С‚СЂРµСѓРіРѕР»СЊРЅРёРєР°: РѕРґРёРЅ - Р¶РµР»С‚С‹Р№, РІС‚РѕСЂРѕР№ - РєСЂР°СЃРЅС‹Р№
 //
 
 
@@ -20,7 +20,7 @@ void processInput(GLFWwindow* window) {
 #define W_HEIGHT 800
 
 
-const char* vertexShaderSource = "#version 330 core\n" // шейдер
+const char* vertexShaderSource = "#version 330 core\n" // ГёГҐГ©Г¤ГҐГ°
 "layout (location = 0) in vec3 aPos;\n"
 "void main() {\n"
 "	gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0f);\n"
@@ -65,7 +65,7 @@ int main() {
 	//::SHADER  SETUP::
 	//:::::::::::::::::
 
-	unsigned int vertexShader = glCreateShader(GL_VERTEX_SHADER); // создаём пустышку
+	unsigned int vertexShader = glCreateShader(GL_VERTEX_SHADER); // Г±Г®Г§Г¤Г ВёГ¬ ГЇГіГ±ГІГ»ГёГЄГі
 	glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
 	glCompileShader(vertexShader);
 
@@ -79,7 +79,7 @@ int main() {
 
 
 
-	unsigned int redFragmentShader = glCreateShader(GL_FRAGMENT_SHADER); // создаём пустышку
+	unsigned int redFragmentShader = glCreateShader(GL_FRAGMENT_SHADER); // Г±Г®Г§Г¤Г ВёГ¬ ГЇГіГ±ГІГ»ГёГЄГі
 	glShaderSource(redFragmentShader, 1, &redFragmentShaderSource, NULL);
 	glCompileShader(redFragmentShader);
 	glGetShaderiv(redFragmentShader, GL_COMPILE_STATUS, &success);
@@ -89,7 +89,7 @@ int main() {
 			infoLog << std::endl;
 	}
 
-	unsigned int yellowFragmentShader = glCreateShader(GL_FRAGMENT_SHADER); // создаём пустышку
+	unsigned int yellowFragmentShader = glCreateShader(GL_FRAGMENT_SHADER); // Г±Г®Г§Г¤Г ВёГ¬ ГЇГіГ±ГІГ»ГёГЄГі
 	glShaderSource(yellowFragmentShader, 1, &yellowFragmentShaderSource, NULL);
 	glCompileShader(yellowFragmentShader);
 	glGetShaderiv(yellowFragmentShader, GL_COMPILE_STATUS, &success);
@@ -161,23 +161,23 @@ int main() {
 	//	0.0f, 0.0f, 0.0f
 	//};
 
-	unsigned int VBO1, VAO1, VBO2, VAO2; // для хранения id
+	unsigned int VBO1, VAO1, VBO2, VAO2; // Г¤Г«Гї ГµГ°Г Г­ГҐГ­ГЁГї id
 
 	glGenVertexArrays(1, &VAO1);
-	glGenBuffers(1, &VBO1); // делай 1 буфер
+	glGenBuffers(1, &VBO1); // Г¤ГҐГ«Г Г© 1 ГЎГіГґГҐГ°
 
 	glGenVertexArrays(1, &VAO2);
 	glGenBuffers(1, &VBO2);
 
-	glBindVertexArray(VAO1);// сделай из выделенного пространства рабочий буфеp
-	glBindBuffer(GL_ARRAY_BUFFER, VBO1); // сделай из выделенного пространства рабочий буфер
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices1), vertices1, GL_STATIC_DRAW); // добавь в буфер данные
+	glBindVertexArray(VAO1);// Г±Г¤ГҐГ«Г Г© ГЁГ§ ГўГ»Г¤ГҐГ«ГҐГ­Г­Г®ГЈГ® ГЇГ°Г®Г±ГІГ°Г Г­Г±ГІГўГ  Г°Г ГЎГ®Г·ГЁГ© ГЎГіГґГҐp
+	glBindBuffer(GL_ARRAY_BUFFER, VBO1); // Г±Г¤ГҐГ«Г Г© ГЁГ§ ГўГ»Г¤ГҐГ«ГҐГ­Г­Г®ГЈГ® ГЇГ°Г®Г±ГІГ°Г Г­Г±ГІГўГ  Г°Г ГЎГ®Г·ГЁГ© ГЎГіГґГҐГ°
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices1), vertices1, GL_STATIC_DRAW); // Г¤Г®ГЎГ ГўГј Гў ГЎГіГґГҐГ° Г¤Г Г­Г­Г»ГҐ
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
 
 	glBindVertexArray(VAO2);
 	glBindBuffer(GL_ARRAY_BUFFER, VBO2);
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices2), vertices2, GL_STATIC_DRAW); // добавь в буфер данные
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices2), vertices2, GL_STATIC_DRAW); // Г¤Г®ГЎГ ГўГј Гў ГЎГіГґГҐГ° Г¤Г Г­Г­Г»ГҐ
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
 

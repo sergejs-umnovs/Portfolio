@@ -5,7 +5,7 @@
 
 
 // 
-// Программа, которая выводит на экран вращающийся треугольник
+// A program which draws a rotating triangle
 // 
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
@@ -20,7 +20,7 @@ void processInput(GLFWwindow* window) {
 #define W_HEIGHT 800
 
 
-const char* vertexShaderSource = "#version 330 core\n" // øåéäåð
+const char* vertexShaderSource = "#version 330 core\n" // shader source code
 "layout (location = 0) in vec3 aPos;\n"
 "void main() {\n"
 "	gl_Position = vec4(aPos.x, aPos.y, aPos.z, 1.0f);\n"
@@ -34,11 +34,11 @@ const char* fragmentShaderSource = "#version 330 core\n"
 
 
 int main() {
-	glfwInit(); // 1.
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3); // 2.
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3); // 3.
-	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE); // 4.
-	GLFWwindow* window = glfwCreateWindow(W_WIDTH, W_HEIGHT, "LearnOpenGL", NULL, NULL); // 4.
+	glfwInit();
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+	GLFWwindow* window = glfwCreateWindow(W_WIDTH, W_HEIGHT, "LearnOpenGL", NULL, NULL);
 
 	if (window == NULL) {
 		std::cout << "no window for you" << std::endl;
@@ -46,8 +46,8 @@ int main() {
 		return -1;
 	}
 
-	glfwMakeContextCurrent(window); // 5.
-	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback); // 6.
+	glfwMakeContextCurrent(window);
+	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
 
 	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
 		std::cout << "GLAD not working" << std::endl;
@@ -59,28 +59,28 @@ int main() {
 	//::SHADER  SETUP::
 	//:::::::::::::::::
 
-	unsigned int vertexShader = glCreateShader(GL_VERTEX_SHADER); // ñîçäà¸ì ïóñòûøêó
-	glShaderSource(vertexShader, 1, &vertexShaderSource, NULL);
-	glCompileShader(vertexShader);
+	unsigned int vertexShader = glCreateShader(GL_VERTEX_SHADER); // create a vertex shader
+	glShaderSource(vertexShader, 1, &vertexShaderSource, NULL); // add the vertex shader source code to the vertex shader
+	glCompileShader(vertexShader); // compile shader
 
 	int success;
 	char infoLog[512];
 	glGetShaderiv(vertexShader, GL_COMPILE_STATUS, &success);
-	if (!success) {
+	if (!success) { // display errors
 		glGetShaderInfoLog(vertexShader, 512, NULL, infoLog);
 		std::cout << "Vertex shader compilation failed\n" << infoLog << std::endl;
 	}
 
 
 
-	unsigned int fragmentShader = glCreateShader(GL_FRAGMENT_SHADER); // ñîçäà¸ì ïóñòûøêó
-	glShaderSource(fragmentShader, 1, &fragmentShaderSource, NULL);
+	unsigned int fragmentShader = glCreateShader(GL_FRAGMENT_SHADER); // create a fragment shader
+	glShaderSource(fragmentShader, 1, &fragmentShaderSource, NULL); // add the fragment shader source code to the fragment shader
 	glCompileShader(fragmentShader);
 
 
 	glGetShaderiv(fragmentShader, GL_COMPILE_STATUS, &success);
 
-	if (!success) {
+	if (!success) { // display errors
 		glGetShaderInfoLog(fragmentShader, 512, NULL, infoLog);
 		std::cout << "Fragment shader compilation failed\n" <<
 			infoLog << std::endl;
@@ -88,14 +88,14 @@ int main() {
 
 
 
-	unsigned int shaderProgram;
+	unsigned int shaderProgram; // make a shader program
 	shaderProgram = glCreateProgram();
-	glAttachShader(shaderProgram, vertexShader);
+	glAttachShader(shaderProgram, vertexShader); // attach shaders to the program
 	glAttachShader(shaderProgram, fragmentShader);
-	glLinkProgram(shaderProgram);
+	glLinkProgram(shaderProgram); // link the program
 
-	glGetProgramiv(shaderProgram, GL_LINK_STATUS, &success);
-	if (!success) {
+	glGetProgramiv(shaderProgram, GL_LINK_STATUS, &success); 
+	if (!success) { // display errors
 		glGetProgramInfoLog(shaderProgram, 512, NULL, infoLog);
 		std::cout << "An error occured when linking shaders to program\n" << infoLog << std::endl;
 	}
@@ -106,12 +106,12 @@ int main() {
 	//::SHAPE  SETUP::
 	//::::::::::::::::
 
-	float vertices[] = {
+	float vertices[] = { // initial triangle position
 		 0.0f,  0.57735f,  0.0f,
 		-0.5f, -0.288675f, 0.0f,
 		 0.5f, -0.288675f, 0.0f
 	};
-	float convMatrix[4] = {
+	float convMatrix[4] = { // conversion matrix
 		0.0f, 0.0f,
 		0.0f, 0.0f
 	};
@@ -121,15 +121,15 @@ int main() {
 		0.0f, 0.0f, 0.0f
 	};
 
-	unsigned int VBO, VAO; // äëÿ õðàíåíèÿ id
+	unsigned int VBO, VAO;
 
 	glGenVertexArrays(1, &VAO);
-	glGenBuffers(1, &VBO); // äåëàé 1 áóôåð
+	glGenBuffers(1, &VBO);
 
-	glBindVertexArray(VAO);// ñäåëàé èç âûäåëåííîãî ïðîñòðàíñòâà ðàáî÷èé áóôåð
+	glBindVertexArray(VAO);
 
-	glBindBuffer(GL_ARRAY_BUFFER, VBO); // ñäåëàé èç âûäåëåííîãî ïðîñòðàíñòâà ðàáî÷èé áóôåð
-	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW); // äîáàâü â áóôåð äàííûå
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(vertices), vertices, GL_STATIC_DRAW);
 
 	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
 	glEnableVertexAttribArray(0);
@@ -146,10 +146,10 @@ int main() {
 		processInput(window);
 		glClearColor(0.0f, 0.3f, 0.3f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
-		convMatrix[0] =			cosf(x);//x.x
-		convMatrix[1] =         sinf(x);//x.y
+		convMatrix[0] =	cosf(x);//x.x
+		convMatrix[1] = sinf(x);//x.y
 		convMatrix[2] =	-sinf(x);//y.x
-		convMatrix[3] =			cosf(x);//y.y
+		convMatrix[3] =	cosf(x);//y.y
 		
 		convertedVertices[0] = vertices[0] * convMatrix[0] + vertices[1] * convMatrix[2];
 		convertedVertices[1] = vertices[0] * convMatrix[1] + vertices[1] * convMatrix[3];

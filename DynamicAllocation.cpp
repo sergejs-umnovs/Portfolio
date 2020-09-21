@@ -1,6 +1,6 @@
 #include <iostream>
 
-// Программа для понимания того, как происходит выделение динамической памяти в С++
+// Program, which explains dynamic memory allocation in C++
 using namespace std;
 
 int main() {

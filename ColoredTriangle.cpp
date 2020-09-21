@@ -37,44 +37,42 @@ int main() {
 	glViewport(0, 0, W_WIDTH, W_HEIGHT);  // set an initial viewport
 
 	//user code here
-	Shader shader("C:/Users/redst/Desktop/repos/VertexShader.vsh", "C:/Users/redst/Desktop/repos/FragmentShader.fsh"); // use a program, which makes a shader program
+	Shader shader("VertexShader.vsh", "FragmentShader.fsh"); // use a pre-written class, which makes a shader program
 
 	unsigned int VBO, VAO; // variables to store vertex buffer object and vertex array object names
-	float verts[] = {
+	float verts[] = { // vertex position and color data
 		 0.0f, 0.5f, 0.0f, 1.0f, 0.0f, 0.0f,
 		-0.5f,-0.5f, 0.0f, 0.0f, 1.0f, 0.0f,
 		 0.5f,-0.5f, 0.0f, 0.0f, 0.0f, 1.0f
 	};
 
-	glGenVertexArrays(1, &VAO);
-	glGenBuffers(1, &VBO);
+	glGenVertexArrays(1, &VAO); // generate a vertex array object name
+	glGenBuffers(1, &VBO); // generate a vertex buffer object name
 
-	glBindVertexArray(VAO);
-	glBindBuffer(GL_ARRAY_BUFFER, VBO);
-	glBufferData(GL_ARRAY_BUFFER,sizeof(verts),verts,GL_STATIC_DRAW);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)0);
-	glEnableVertexAttribArray(0);
-	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 6 * sizeof(float), (void*)(3*sizeof(float)));
-	glEnableVertexAttribArray(1);
+	glBindVertexArray(VAO); // make vertex array object
+	glBindBuffer(GL_ARRAY_BUFFER, VBO); // make vertex buffer object
+	glBufferData(GL_ARRAY_BUFFER,sizeof(verts),verts,GL_STATIC_DRAW); // load data into VBO 
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0); // tell vertex shader the location of vertex position data
+	glEnableVertexAttribArray(0); // enable position attribute
+	glVertexAttribPointer(1, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)(3*sizeof(float))); // tell vertex shader the location of vertex color data
+	glEnableVertexAttribArray(1); // enable color attribute
 
-	glBindVertexArray(0);
+	glBindVertexArray(0); // unbind VAO
 	
-	//float timeVal, greenVal;
-	int moveLocation;
 
-	while (!glfwWindowShouldClose(window)) { // 8.
-		glfwSwapBuffers(window);
-		glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
+	while (!glfwWindowShouldClose(window)) { // main rendering loop
+		glfwSwapBuffers(window); // needed to make OpenGL show the result
+		glClearColor(1.0f, 1.0f, 1.0f, 1.0f); // clear the screen with white color
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		shader.use();
+		shader.use(); // use shader program to draw 
 		
-		glBindVertexArray(VAO);
-		glDrawArrays(GL_TRIANGLES, 0, 3);
-		glfwPollEvents();
+		glBindVertexArray(VAO); // bind our VAO to get data
+		glDrawArrays(GL_TRIANGLES, 0, 3); // draw the triangle
+		glfwPollEvents(); // listen to events (key press, mouse movement, etc.)
 	}
 
-	glDeleteBuffers(1, &VBO);
+	glDeleteBuffers(1, &VBO); // delete everything to free the memory
 	glDeleteVertexArrays(1, &VAO);
 	glDeleteProgram(shader.ID);
 

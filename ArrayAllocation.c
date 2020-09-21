@@ -2,10 +2,10 @@
 #include <stdlib.h>
 #define SIZE 14
 
-//
-// Программа, нацеленная на изучение функции malloc и динамических массивов
-//
 
+//
+// Program dedicated to learning dynamically allocated arrays and how malloc function works
+//
 
 int main() {
 	int array[SIZE] = {}; //					- генерируем статический массив

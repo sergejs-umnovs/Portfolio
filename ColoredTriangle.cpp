@@ -4,43 +4,40 @@
 #include "ShaderLoader.h"
 
 
-//Программа, которая рисует цветной треугольник
+//Program, which draws a tri-colored triangle
 
 
-void framebuffer_size_callback(GLFWwindow* window, int width, int height) {
-	glViewport(0, 0, width, height);
-}
-void processInput(GLFWwindow* window) {
-
+void framebuffer_size_callback(GLFWwindow* window, int width, int height) { // the callback function, that is being called by the window resizing
+	glViewport(0, 0, width, height); // resize viewport
 }
 
 #define W_WIDTH 800
 #define W_HEIGHT 600
 
 int main() {
-	glfwInit(); 
-	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3); 
+	glfwInit(); // initialize GLFW
+	glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3); // set OpenGL version to 3.3
 	glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3); 
 	glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE); 
-	GLFWwindow* window = glfwCreateWindow(W_WIDTH, W_HEIGHT, "LearnOpenGL", NULL, NULL); 
+	GLFWwindow* window = glfwCreateWindow(W_WIDTH, W_HEIGHT, "LearnOpenGL", NULL, NULL); // create a window
 
-	if (window == NULL) {
+	if (window == NULL) { // check if window is successfully created
 		std::cout << "no window for you" << std::endl;
 		glfwTerminate();
 		return -1;
 	}
 
-	glfwMakeContextCurrent(window); // 5.
-	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback); 
-	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) {
-		std::cout << "GLAD not working" << std::endl;
+	glfwMakeContextCurrent(window); // make the newly created window current
+	glfwSetFramebufferSizeCallback(window, framebuffer_size_callback); // set the callback function 
+	if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress)) { // load OpenGL API
+		std::cout << "GLAD not working" << std::endl; // check if it is fuccessfully loaded
 		return -1;
 	}
 
-	glViewport(0, 0, W_WIDTH, W_HEIGHT);  // 7.
+	glViewport(0, 0, W_WIDTH, W_HEIGHT);  // set an initial viewport
 
 	//user code here
-	Shader shader("C:/Users/redst/Desktop/repos/VertexShader.vsh", "C:/Users/redst/Desktop/repos/FragmentShader.fsh");
+	Shader shader("C:/Users/redst/Desktop/repos/VertexShader.vsh", "C:/Users/redst/Desktop/repos/FragmentShader.fsh"); // use
 
 	unsigned int VBO, VAO;
 	float verts[] = {
@@ -66,7 +63,6 @@ int main() {
 	int moveLocation;
 
 	while (!glfwWindowShouldClose(window)) { // 8.
-		processInput(window);
 		glfwSwapBuffers(window);
 		glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);

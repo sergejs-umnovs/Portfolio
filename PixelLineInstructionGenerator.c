@@ -4,21 +4,21 @@
 #define PI 3.141592
 
 // 
-// Программа для генерации инструкции по рисованию пиксельных отрезков
-// Нужна была мне для строительства в Minecraft
+// Program, which generates instructions for drawing a pixelated line
+// Needed it for building in Minecraft
 
 int main() {
-    float angle, tg, count = 0;										// все необходимые переменные
+    float angle, tg, count = 0;										// all the neccessary variables
     int i, width;											// 
 	printf("Enter angle between ground and line (in degrees) and line horizontal width : ");	// 
-    scanf("%f %d", &angle, &width);									// ввод
-    angle = angle * PI/180;										// преобразование градусов в радианы
+    scanf("%f %d", &angle, &width);									// input
+    angle = angle * PI/180;										// convert degrees to radians
     tg = tanf(angle);											// 
-    for (i = 1; i <= width; i++){									// цикл, в котором генерируется инструкция
-        count += tg;											// добавляем тангенс угла к переменной дискретной высоты
-        printf("%d block is %d blocks in height\n", i, (int)floor(count));				// выводим строку инструкций с целым числом блоков
-        count = count - floor(count);									// отнимаем целую часть от переменной дискретной высоты
+    for (i = 1; i <= width; i++){									// cycle, that generates the instructions
+        count += tg;											// add an angle tangent to a discrete height variable
+        printf("%d block is %d blocks in height\n", i, (int)floor(count));				// print instruction line
+        count = count - floor(count);									// subtract the rounded value from the discrete height variable
 	getch();
-    }													// ставим программу на "паузу"
+    }													// pause program
     return 0;
 }

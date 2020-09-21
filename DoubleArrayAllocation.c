@@ -20,7 +20,7 @@ int main() {
 
 	for (i = 0; i < arrayWidth; i++) {
 		for (j = 0; j < arrayLength; j++)
-			printf("%d\n", *(pt + i*arrayWidth + j)); //print everything in the array
+			printf("%d\n", *(pt + i*arrayWidth + j)); //print array contents
 		printf("\n");  
     }
 	free(pt); // free the memory

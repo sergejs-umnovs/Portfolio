@@ -37,9 +37,9 @@ int main() {
 	glViewport(0, 0, W_WIDTH, W_HEIGHT);  // set an initial viewport
 
 	//user code here
-	Shader shader("C:/Users/redst/Desktop/repos/VertexShader.vsh", "C:/Users/redst/Desktop/repos/FragmentShader.fsh"); // use
+	Shader shader("C:/Users/redst/Desktop/repos/VertexShader.vsh", "C:/Users/redst/Desktop/repos/FragmentShader.fsh"); // use a program, which makes a shader program
 
-	unsigned int VBO, VAO;
+	unsigned int VBO, VAO; // variables to store vertex buffer object and vertex array object names
 	float verts[] = {
 		 0.0f, 0.5f, 0.0f, 1.0f, 0.0f, 0.0f,
 		-0.5f,-0.5f, 0.0f, 0.0f, 1.0f, 0.0f,
@@ -67,11 +67,8 @@ int main() {
 		glClearColor(1.0f, 1.0f, 1.0f, 1.0f);
 		glClear(GL_COLOR_BUFFER_BIT);
 
-		//timeVal = glfwGetTime();
-		//greenVal = sin(timeVal) / 2.0f + 0.5f;
-		//moveLocation = glGetUniformLocation(shader.ID, "move");
 		shader.use();
-		//glUniform4f(moveLocation, -0.2f, 0.0f, 0.0f, 0.0f);
+		
 		glBindVertexArray(VAO);
 		glDrawArrays(GL_TRIANGLES, 0, 3);
 		glfwPollEvents();

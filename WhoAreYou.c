@@ -5,8 +5,8 @@
 #define RND rand()%10
 
 // 
-// Программа, которая объединяет много строк в одну
-// Ради шутки
+// Program, which makes a text from string fragments
+// The "truth" teller
 
 
 int main() {

@@ -1,6 +1,6 @@
 #include <stdio.h>
 // 
-// Программа для понимания указателей - обычных и двойных
+// Program, which explains pointers
 // 
 
 int main() {

@@ -1,6 +1,6 @@
 #include <iostream>
 
-//Программа для понимания меток. Работает в С и С++
+//Program, which explains labels. Works in С and С++
 
 
 using namespace std;

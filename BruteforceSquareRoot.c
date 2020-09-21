@@ -2,7 +2,7 @@
 #include <conio.h>
 
 // 
-// Программа вычисления квадратного корня методом брутфорса
+// Program, which computes square root of a number via the brute force method
 // 
 
 int main() {

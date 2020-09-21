@@ -1,6 +1,8 @@
 ﻿ #ifndef CS_CLASSES
 #define CS_CLASSES
 
+// Header file needed for the game
+
 //macros
 /*
 INV_SIZE inventory size

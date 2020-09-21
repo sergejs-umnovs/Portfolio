@@ -9,7 +9,7 @@
 #define POT_BONUS 76
 #include "items.h"
 
-// Текстовая игра, правда незаконченная, я её писал чисто для понимания ООП в С++
+// An unfinished text game. I was writing it to understand OOP in C++
 
 int main() {
 	flags.yourturn = 1;

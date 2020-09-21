@@ -1,7 +1,7 @@
 #include <iostream>
 
 
-// Программа для понимания цикла foreach в С++
+// Program, which explains foreach loop
 
 using namespace std;
 

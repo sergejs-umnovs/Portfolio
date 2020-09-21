@@ -5,7 +5,7 @@
 #include <time.h>
 
 // 
-//  Программа, которую почти невозможно прочитать, выдаёт либо "Равно нулю" либо "Не равно нулю"
+//  Obfuscated C code of a program, which randomly prints "equal to 0" or "not equal to 0"
 // 
 
 #define a int
@@ -40,9 +40,9 @@ a l c d e
 	a* test g c a* d o c p c a d d b
 	*test g q c d r z b
 	s c *test d e
-		t c "Равно нулю" d b
+		t c "equal to 0" d b
 	f u e
-		t c "Не равно нулю" d b
+		t c "net equal to 0" d b
 	f
 	v c test d b
 	w c d b

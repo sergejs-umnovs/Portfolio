@@ -3,52 +3,52 @@
 #include <windows.h>
 
 // 
-// Программа для вывода на экран цветного изображения, работает только в консоли windows
+// Program, which prints a colored text picture. Works only in Windows.
 // 
-// Создайте файл с названием "sprite.txt" в той же папке, где находится скомпилированная программа, скопируйте и вставьте
+// Make a text file named "sprite.txt" in the same directory as the program, copy and paste
 // RGI1RGI1RGI1RGI1RGI1RGI1RGI1RGI1RGI1RGI1-RGI1RGI111RGI1RGI111RGI1RGI1-RGI1RGI1RGI1RGI1RGI1RGI1RGI1RGI1RGI1RGI1-11RGI1RGI1RGI1RGI1RGI1RGI111-RGI1RGI1111111RGI1RGI1c 
-// в этот файл. При запуске у Вас должна отобразиться картинка
-// Я знаю, это почти нечитабельно, но я так сам решил
+// into the text file. The program should print a colored picture in the console window
+// I know, the picture code is barely readable, but the program needs this code to print an image
 
 int main() {
-	DWORD color = 0; //										- WinAPI аналог int для хранения цвета								- 
-	FILE *fp = fopen("sprite.txt", "r"); //					- открываем файл
-	HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE); // 	- чтобы окрасить символ, нужна рукоятка консоли
-	for (;;) { //											- делаем бесконечный цикл
-		switch(fgetc(fp)) {	//								- отслеживаем все символы с помощью switch
+	DWORD color = 0; // WinAPI DWORD size is equal to int size								- 
+	FILE *fp = fopen("sprite.txt", "r"); // open the picture file
+	HANDLE handle = GetStdHandle(STD_OUTPUT_HANDLE); // we need a window handle to color a "pixel"
+	for (;;) { // make an infinite loop
+		switch(fgetc(fp)) {
 		
 		case 'R':
-		color |= BACKGROUND_RED; //							- если следующий символ - 'R', то подмешиваем красный к переменной цвета
+		color |= BACKGROUND_RED; // if the next symbol is 'R', then add red to a color variable
 		//printf("%d\n", color);
 		break;
 		
 		case 'G':
-		color |= BACKGROUND_GREEN; //						- если следующий символ - 'G', то подмешиваем зелёный к переменной цвета
+		color |= BACKGROUND_GREEN; // if the next symbol is 'G', then add green to a color variable
 		//printf("%d\n", color);
 		break;
 		
 		case 'B':
-		color |= BACKGROUND_BLUE; //						- если следующий символ - 'B', то подмешиваем синий к переменной цвета
+		color |= BACKGROUND_BLUE; // if the next symbol is 'B', then add blue to a color variable
 		//printf("%d\n", color);
 		break;
 		
 		case 'I':
-		color |= BACKGROUND_INTENSITY; //					- если следующий символ - 'I', то делаем цвет светлым
+		color |= BACKGROUND_INTENSITY; // if the next symbol is 'I', then make the color bright
 		//printf("%d\n", color);
 		break;
 		
 		case '1':
-		SetConsoleTextAttribute(handle, color); //			- если следующий символ - '1', то выводим цветной символ
-		printf("%c",' '); /*								- в WinAPI есть 2 типа цветов символов, один из которых отвечает за цвет заднего фона, а второй - за цвет
-		//printf("%d\n", color);							символов. Чтобы отобразить просто фон, нужно вывести символ ' '*/
-		color = 0; //										- сбрасываем цвет, делая его чёрным
+		SetConsoleTextAttribute(handle, color); // if the next symbol is '1', then print the colored pixel
+		printf("%c",' '); // WinAPI has two types of symbol colors, one of them defines the text color, and the second defines the background color
+				// we just need to print ' ' to add a "pixel" to the picture on the screen
+		color = 0; // reset the color variable, to make it black
 		break;
 		
-		case '-': //										- если следующий символ - '-', то переходим на следующую строку в терминале
+		case '-': // if the next symbol is 'I', then make a new line in the console screen
 		printf("\n");
 		break;
 		
-		case 'c': //										- если следующий символ - 'с', то это значит, что файл закончился и следует прервать цикл
+		case 'c': // if the next symbol is 'I', then it means that there's no more data in the file and the cycle should be broken
 		break;
 		}
 		

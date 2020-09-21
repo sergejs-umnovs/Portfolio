@@ -1,7 +1,7 @@
 #include <stdio.h>
 
 // 
-// Программа для понимания массивов указателей на функции, которые возвращают указатель на значение
+// Program, which explains arrays of function  pointers
 // 
 
 int *sayHi() {

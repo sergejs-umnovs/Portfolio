@@ -4,7 +4,7 @@
 //#include <windows.h>
 
 //
-// Программа, которая рисует два треугольника: один - желтый, второй - красный
+// Program, which draws two triangles - red and yellow
 //
 
 
